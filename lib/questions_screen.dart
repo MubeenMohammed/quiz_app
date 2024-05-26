@@ -21,8 +21,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     final currentQuestion = questions[questionNo];
 
     void answerSelected(String selectedAnswer) {
-      widget.onSelectAnswer(selectedAnswer);
       if (questionNo < questions.length - 1) {
+        widget.onSelectAnswer(selectedAnswer);
         setState(() {
           questionNo++;
         });
