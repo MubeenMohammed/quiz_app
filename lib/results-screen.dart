@@ -3,19 +3,19 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/models/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen(this.chosenAnswers, {super.key});
+  const ResultsScreen(this.chosenAnswers, this.restartQuiz, {super.key});
 
   final List<String> chosenAnswers;
+  final void Function() restartQuiz;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
-
     for (var i = 0; i < chosenAnswers.length; i++) {
       summary.add(
         {
           'question_index': i,
           'question': questions[i].text,
-          'correct-answer': questions[i].answers[0],
+          'correct_answer': questions[i].answers[0],
           'user_answer': chosenAnswers[i],
         },
       );
@@ -44,8 +44,9 @@ class ResultsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-                style: const TextStyle(color: Colors.white, fontSize: 18),
-                "You answered $numCorrectQuestion out of $numTotalQuestions questions correctly"),
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white, fontSize: 19),
+                "You answered $numCorrectQuestion out of $numTotalQuestions questions correctly!"),
             const SizedBox(
               height: 30,
             ),
@@ -53,10 +54,11 @@ class ResultsScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            TextButton(
-              onPressed: () {},
+            TextButton.icon(
+              onPressed: restartQuiz,
               style: TextButton.styleFrom(foregroundColor: Colors.white),
-              child: const Text("Restart Quiz!"),
+              icon: const Icon(Icons.restart_alt_outlined),
+              label: const Text("Restart Quiz!"),
             )
           ],
         ),
