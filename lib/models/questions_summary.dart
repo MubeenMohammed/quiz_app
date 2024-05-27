@@ -7,7 +7,7 @@ class QuestionsSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 400,
       child: SingleChildScrollView(
         child: Column(
           children: summaryData.map(
@@ -17,8 +17,10 @@ class QuestionsSummary extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(9),
-                    decoration: const BoxDecoration(
-                      color: Colors.yellow,
+                    decoration: BoxDecoration(
+                      color: data['user_answer'] == data['correct_answer']
+                          ? const Color.fromARGB(255, 12, 211, 15)
+                          : const Color.fromARGB(255, 249, 4, 4),
                       shape: BoxShape.circle,
                     ),
                     child: Text(
